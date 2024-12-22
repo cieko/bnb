@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mobile-app",
-    "slug": "mobile-app",
+    "name": "bnb",
+    "slug": "bnb",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "bnb",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
