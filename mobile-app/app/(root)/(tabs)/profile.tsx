@@ -7,13 +7,13 @@ import { settings } from '@/constants/data'
 import { useGlobalContext } from '@/lib/global-provider'
 import { logout } from '@/lib/appwrite'
 
-const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: { icon: ImageSourcePropType, title: string, onPress?: () => void, textStyle?: string, showArrow?: boolean }) => (
+const SettingsItemBlock = ({ icon, title, onPress, textStyle, showArrow = true }: { icon: ImageSourcePropType, title: string, onPress?: () => void, textStyle?: string, showArrow?: boolean }) => (
   <TouchableOpacity onPress={onPress} className='flex flex-col items-center justify-between py-3'>
-    <View className='flex flex-col items-center gap-1 border border-primary-100/20 w-24 h-24 justify-center rounded-2xl'>
+    <View className='flex flex-col items-center gap-1 border border-accent-100/20 w-24 h-24 justify-center rounded-2xl'>
       <Image
         source={icon}
         className='size-14'
-        // tintColor={'#2803bd'}
+      // tintColor={'#2803bd'}
       />
 
       <Text className={`text-xs font-rubik-medium text-primary-100/50 ${textStyle ?? ''}`}>{title}</Text>
@@ -21,10 +21,26 @@ const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: { i
   </TouchableOpacity>
 )
 
+const SettingsItem = ({ icon, title, onPress, textStyle, showArrow = true }: { icon: ImageSourcePropType, title: string, onPress?: () => void, textStyle?: string, showArrow?: boolean }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    className="flex flex-row items-center justify-between py-3"
+  >
+    <View className="flex flex-row items-center gap-3">
+      <Image source={icon} className="size-6" />
+      <Text className={`text-lg font-rubik-medium text-black-300 ${textStyle}`}>
+        {title}
+      </Text>
+    </View>
+
+    {showArrow && <Image source={icons.rightArrow} className="size-5" />}
+  </TouchableOpacity>
+);
+
 const Profile = () => {
   const { user, refetch } = useGlobalContext();
 
-  const handleLogout = async () => { 
+  const handleLogout = async () => {
     const result = await logout();
 
     if (result) {
@@ -48,7 +64,7 @@ const Profile = () => {
 
           <Image
             source={icons.bell}
-            className='size-5'
+            className='w-6 h-6'
             tintColor={'#2803bd'}
           />
         </View>
@@ -73,11 +89,22 @@ const Profile = () => {
         </View>
 
         <View className='flex flex-row mt-10 gap-x-5 flex-wrap'>
-          {settings.map((item, index) => (
+          <SettingsItemBlock icon={icons.calendar} title="My Bookings" />
+          <SettingsItemBlock icon={icons.wallet} title="Payments" />
+        </View>
+
+        <View className="flex flex-col mt-5 border-t pt-5 border-primary-300">
+          {settings.slice(2).map((item, index) => (
             <SettingsItem key={index} {...item} />
           ))}
 
-          <SettingsItem icon={icons.logout} title='Logout' textStyle='text-danger' showArrow={false} onPress={handleLogout} />
+          <SettingsItem
+            icon={icons.logout}
+            title="Logout"
+            textStyle="text-danger"
+            showArrow={false}
+            onPress={handleLogout}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
