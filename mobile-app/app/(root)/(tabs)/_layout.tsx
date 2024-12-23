@@ -8,12 +8,12 @@ const TabIcon = ({ focused, icon, title }: { focused: boolean, icon: ImageSource
   <View className='flex-1 mt-3 flex flex-col items-center'>
     <Image
       source={icon}
-      tintColor={focused ? '#d1005d' : '#ff9ab9'}
+      tintColor={focused ? '#2803bd' : '#2803bd50'}
       resizeMode='contain'
       className={`size-6`}
     />
 
-    <Text className={`${focused ? 'text-primary-100 font-rubik-medium' : 'text-primary-200 font-rubik'} text-xs w-full text-center mt-1`}>{title}</Text>
+    <Text className={`${focused ? 'text-accent-100 font-rubik-medium' : 'text-accent-100/50 font-rubik'} text-xs w-full text-center mt-1`}>{title}</Text>
   </View>
 )
 
