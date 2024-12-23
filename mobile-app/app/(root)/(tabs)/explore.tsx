@@ -54,7 +54,7 @@ const Explore = () => {
         )}
         keyExtractor={(item) => item.$id}
         contentContainerClassName="pb-32"
-        columnWrapperClassName="flex gap-5 px-5"
+        columnWrapperClassName="flex gap-2 px-5"
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           loading ? (
